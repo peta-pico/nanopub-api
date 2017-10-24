@@ -5,7 +5,7 @@
 prefix np: <http://www.nanopub.org/nschema#>
 
 select ?G ?S ?P ?O where {
-  {graph ?G {?_np a np:Nanopublication}} union
-  {graph ?H {?_np a np:Nanopublication {?_np np:hasAssertion ?G} union {?_np np:hasProvenance ?G} union {?_np np:hasPublicationInfo ?G}}}
+  {graph ?G {?np a np:Nanopublication}} union
+  {graph ?H {?np a np:Nanopublication {?np np:hasAssertion ?G} union {?np np:hasProvenance ?G} union {?np np:hasPublicationInfo ?G}}}
   graph ?G {?S ?P ?O}
 }
