@@ -1,13 +1,13 @@
 #+ summary: Testing with nanopub SPARQL endpoint at Manchester University
 #+ endpoint: http://openphacts.cs.man.ac.uk:8890/sparql
 #+ method: GET
-#+ enumerate: 
+#+ tags: 
 #+   - np
 
 prefix np: <http://www.nanopub.org/nschema#>
 
 select ?G ?S ?P ?O where {
-  {graph ?G {?np a np:Nanopublication}} union
-  {graph ?H {?np a np:Nanopublication {?np np:hasAssertion ?G} union {?np np:hasProvenance ?G} union {?np np:hasPublicationInfo ?G}}}
+  {graph ?G {?_np_iri a np:Nanopublication}} union
+  {graph ?H {?_np_iri a np:Nanopublication {?_np_iri np:hasAssertion ?G} union {?_np_iri np:hasProvenance ?G} union {?_np_iri np:hasPublicationInfo ?G}}}
   graph ?G {?S ?P ?O}
 }
