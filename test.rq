@@ -3,4 +3,10 @@
 #+ method: GET
 #+ pagination: 50
 
-select distinct ?Concept where {[] a ?Concept} LIMIT 20
+PREFIX np: <http://www.nanopub.org/nschema#>
+PREFIX dc: <http://purl.org/dc/terms/>
+
+select ?np ?time where {
+  ?np a np:Nanopublication ;
+    dc:created ?time .
+} LIMIT 10
