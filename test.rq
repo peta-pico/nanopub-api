@@ -1,7 +1,5 @@
-#+ summary: Testing DBpedia endpoint with SPARQL2Git
-#+ endpoint: http://dbpedia.org/sparql
-#+ tags:
-#+   - dbpedia
+#+ summary: Testing
+#+ endpoint: http://data-beta.linkeddatafragments.org/nanopublications
 #+ method: GET
 #+ pagination: 50
 
