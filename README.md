@@ -1,2 +1,2 @@
 Explore this [grlc](http://grlc.io/) API here:
-http://grlc.io/api/peta-pico/nanopub-api/commit/7d2641708922f714e55c21e21c4d828321b8911f
+http://grlc.io/api/peta-pico/nanopub-api/commit/393748c063d5c6358f67f2da4ef1eae2285b19d4
