@@ -6,8 +6,22 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 
-select ?G ?S ?P ?O where {
-  {graph ?G {?_np_iri a np:Nanopublication}} union
-  {graph ?H {?_np_iri a np:Nanopublication {?_np_iri np:hasAssertion ?G} union {?_np_iri np:hasProvenance ?G} union {?_np_iri np:hasPublicationInfo ?G}}}
+select ?g ?s ?p ?o where {
+  {
+    graph ?g {
+      ?_np_iri a np:Nanopublication
+    }
+  } union
+  {
+    graph ?h {
+      ?_np_iri a np:Nanopublication {
+        ?_np_iri np:hasAssertion ?G
+      } union {
+        ?_np_iri np:hasProvenance ?G
+      } union {
+        ?_np_iri np:hasPublicationInfo ?G
+      }
+    }
+  }
   graph ?G {?S ?P ?O}
 }
