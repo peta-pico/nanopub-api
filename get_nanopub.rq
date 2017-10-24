@@ -15,13 +15,13 @@ select ?g ?s ?p ?o where {
   {
     graph ?h {
       ?_np_iri a np:Nanopublication {
-        ?_np_iri np:hasAssertion ?G
+        ?_np_iri np:hasAssertion ?g
       } union {
-        ?_np_iri np:hasProvenance ?G
+        ?_np_iri np:hasProvenance ?g
       } union {
-        ?_np_iri np:hasPublicationInfo ?G
+        ?_np_iri np:hasPublicationInfo ?g
       }
     }
   }
-  graph ?G {?S ?P ?O}
+  graph ?g {?s ?p ?o}
 }
