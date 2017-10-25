@@ -1,5 +1,4 @@
-#+ summary: Testing with nanopub SPARQL endpoint at Manchester University
-#+ endpoint: http://openphacts.cs.man.ac.uk:8890/sparql
+#+ summary: Testing...
 #+ method: GET
 #+ pagination: 50
 

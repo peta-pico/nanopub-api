@@ -1,8 +1,5 @@
-#+ summary: Testing with nanopub SPARQL endpoint at Manchester University
-#+ endpoint: http://openphacts.cs.man.ac.uk:8890/sparql
+#+ summary: Get nanopublication by identifier (URI)
 #+ method: GET
-#+ tags: 
-#+   - np
 
 prefix np: <http://www.nanopub.org/nschema#>
 
