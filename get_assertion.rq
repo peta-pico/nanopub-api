@@ -1,0 +1,14 @@
+#+ summary: Get assertion graph by nanopub identifier
+#+ method: GET
+
+prefix np: <http://www.nanopub.org/nschema#>
+
+construct {
+  ?s ?p ?o
+} where {
+  graph ?h {
+    ?_np_iri a np:Nanopublication ;
+      np:hasAssertion ?a .
+  }
+  graph ?a {?s ?p ?o}
+}
