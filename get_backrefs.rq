@@ -1,0 +1,18 @@
+#+ summary: Get nanopublication that contain the given URI
+#+ method: GET
+
+prefix np: <http://www.nanopub.org/nschema#>
+
+select ?np where {
+  graph ?h {
+    ?np a np:Nanopublication .
+    { ?np np:hasAssertion ?g } union
+    { ?np np:hasProvenance ?g } union
+    { ?np np:hasPublicationInfo ?g }
+  }
+  graph ?g {
+    { ?_ref_iri ?p ?o } union
+    { ?s ?_ref_iri ?o } union
+    { ?s ?p ?_ref_iri }
+  }
+}

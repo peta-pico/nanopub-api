@@ -8,8 +8,7 @@ select ?g ?s ?p ?o where {
     graph ?g {
       ?_np_iri a np:Nanopublication
     }
-  } union
-  {
+  } union {
     graph ?h {
       ?_np_iri a np:Nanopublication {
         ?_np_iri np:hasAssertion ?g
