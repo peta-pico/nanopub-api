@@ -1,1 +1,1 @@
-http://openphacts.cs.man.ac.uk:8890/sparql
+http://graphdb.dumontierlab.com/sparql
