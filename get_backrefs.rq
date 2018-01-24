@@ -1,9 +1,10 @@
 #+ summary: Get nanopublication that contain the given URI
 #+ method: GET
+#+ pagination: 1000
 
 prefix np: <http://www.nanopub.org/nschema#>
 
-select ?np where {
+select distinct ?np where {
   graph ?h {
     ?np a np:Nanopublication .
     { ?np np:hasAssertion ?g } union
