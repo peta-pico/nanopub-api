@@ -1,3 +1,5 @@
+# grlc doesn't yet support construct queries
+#
 #+ summary: Get assertion graph by nanopub identifier
 #+ method: GET
 
