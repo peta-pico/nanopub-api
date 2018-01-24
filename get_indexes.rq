@@ -1,0 +1,21 @@
+#+ summary: Get all nanopublication indexes (excluding incomplete ones)
+#+ method: GET
+#+ pagination: 1000
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix dce: <http://purl.org/dc/elements/1.1/>
+prefix dct: <http://purl.org/dc/terms/>
+
+select ?np ?title ?date where {
+  graph ?h {
+    ?np a np:Nanopublication .
+    ?np np:hasPublicationInfo ?i .
+  }
+  graph ?i {
+    ?np a npx:NanopubIndex .
+    filter not exists { ?np a npx:IncompleteIndex . }
+    optional { ?np dce:title ?title . }
+    optional { ?np dct:created ?date . }
+  }
+} order by desc(?date)
