@@ -4,16 +4,16 @@
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
 
-select ?element_np {
+select ?elementnp {
   graph ?h {
-    ?_index_np_iri a np:Nanopublication .
-    ?_index_np_iri np:hasAssertion ?index_a .
-    ?_index_np_iri np:hasPublicationInfo ?index_i .
+    ?_indexnp_iri a np:Nanopublication .
+    ?_indexnp_iri np:hasAssertion ?index_a .
+    ?_indexnp_iri np:hasPublicationInfo ?index_i .
   }
   graph ?index_a {
-    optional { ?_index_np_iri npx:includesElement ?element_np . }
+    optional { ?_indexnp_iri npx:includesElement ?elementnp . }
   }
   graph ?index_i {
-    ?_index_np_iri a npx:NanopubIndex .
+    ?_indexnp_iri a npx:NanopubIndex .
   }
 }
