@@ -1,0 +1,19 @@
+#+ summary: Get all nanopublication that the given index directly contains as elements
+#+ method: GET
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npx: <http://purl.org/nanopub/x/>
+
+select ?element_np {
+  graph ?h {
+    ?_index_np_iri a np:Nanopublication .
+    ?_index_np_iri np:hasAssertion ?index_a .
+    ?_index_np_iri np:hasPublicationInfo ?index_i .
+  }
+  graph ?index_a {
+    optional { ?_index_np_iri npx:includesElement ?element_np . }
+  }
+  graph ?index_i {
+    ?_index_np_iri a npx:NanopubIndex .
+  }
+}
