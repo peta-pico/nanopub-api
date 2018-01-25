@@ -1,4 +1,4 @@
-#+ summary: Get nanopublication that contain the given URI
+#+ summary: Get all nanopublications for a given triple pattern
 #+ method: GET
 #+ pagination: 1000
 
