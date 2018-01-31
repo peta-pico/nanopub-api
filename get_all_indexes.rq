@@ -6,6 +6,8 @@ prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
 prefix dce: <http://purl.org/dc/elements/1.1/>
 prefix dct: <http://purl.org/dc/terms/>
+prefix pav: <http://purl.org/pav/>
+prefix prov: <http://www.w3.org/ns/prov#>
 
 select ?np ?title ?date ?appends (count(distinct ?sub) as ?subindex_count) where {
   graph ?h {
@@ -21,8 +23,8 @@ select ?np ?title ?date ?appends (count(distinct ?sub) as ?subindex_count) where
     ?np a npx:NanopubIndex .
     filter not exists { ?np a npx:IncompleteIndex . }
     optional { ?np dce:title ?title . }
-    optional { ?np dct:created ?date . }
+    optional { ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date . }
   }
 }
-group by ?np ?title ?date ?appends
+group by ?np ?title ?appends ?date
 order by desc(?date)

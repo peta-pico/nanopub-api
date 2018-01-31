@@ -1,4 +1,4 @@
-#+ summary: Get all nanopublications that contain the given URI
+#+ summary: Find all nanopublications that contain the given URI, in undefined order
 #+ method: GET
 #+ pagination: 1000
 
