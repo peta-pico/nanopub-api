@@ -13,5 +13,6 @@ select distinct ?np where {
   }
   graph ?g {
     ?__subj_iri ?__pred_iri ?__obj_iri .
+    ?__subj_iri ?__pred_iri ?__objliteral .
   }
 }
