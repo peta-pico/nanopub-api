@@ -1,0 +1,22 @@
+#+ summary: Find all nanopublication by signature
+#+ method: GET
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix dce: <http://purl.org/dc/elements/1.1/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix pav: <http://purl.org/pav/>
+prefix prov: <http://www.w3.org/ns/prov#>
+
+select distinct ?np ?date where {
+  graph ?h {
+    ?np a np:Nanopublication .
+    ?np np:hasPublicationInfo ?i .
+  }
+  graph ?i {
+    ?np npx:hasSignatureElement ?sig .
+    ?sig npx:hasPublicKey ?_publickey .
+    ?np (dct:creator|dce:creator|pav:createdBy|prov:wasAttributedTo) ?__creator_iri .
+  }
+}
+order by desc(?date)
