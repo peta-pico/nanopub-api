@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublication by signature
+#+ summary: Find all nanopublications by signature
 #+ method: GET
 
 prefix np: <http://www.nanopub.org/nschema#>
