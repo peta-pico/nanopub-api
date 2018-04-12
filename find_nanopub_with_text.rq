@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications that contain the given text in a literal
+#+ summary: Find all nanopublications that contain the given text
 #+ method: GET
 #+ pagination: 1000
 
