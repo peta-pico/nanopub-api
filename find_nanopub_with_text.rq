@@ -1,0 +1,20 @@
+#+ summary: Find all nanopublications that contain the given text in a literal
+#+ method: GET
+#+ pagination: 1000
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
+prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso (untested)
+
+select distinct ?np ?v where {
+  graph ?h {
+    ?np a np:Nanopublication .
+    { ?np np:hasAssertion ?g } union
+    { ?np np:hasProvenance ?g } union
+    { ?np np:hasPublicationInfo ?g }
+  }
+  graph ?g {
+    { ?v ?p1 ?o1 } union { ?s2 ?v ?o2 } union { ?s3 ?p3 ?v }
+    ?v (luc:npIdx|bif:contains) ?_text .
+  }
+}
