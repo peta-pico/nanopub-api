@@ -16,6 +16,6 @@ select distinct ?pubkey where {
   }
   graph ?i {
     ?s npx:hasPublicKey ?pubkey .
-    ?np (dct:creator|dce:creator|pav:createdBy|pav1:createdBy|pav2:createdBy) ?__user .
+    ?np (dct:creator|dce:creator|pav:createdBy|pav1:createdBy|pav2:createdBy) ?_user_iri .
   }
 }
