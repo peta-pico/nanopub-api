@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications by signature
+#+ summary: Find all nanopublications by signature (not excluding invalid ones)
 #+ method: GET
 
 prefix np: <http://www.nanopub.org/nschema#>
@@ -14,7 +14,6 @@ select distinct ?np ?date where {
     ?np np:hasPublicationInfo ?i .
   }
   graph ?i {
-    ?np npx:hasSignatureElement ?sig .
     ?sig npx:hasPublicKey ?_publickey .
     ?np (dct:creator|dce:creator|pav:createdBy|prov:wasAttributedTo) ?__creator_iri .
     optional { ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date . }
