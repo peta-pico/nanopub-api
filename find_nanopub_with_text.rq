@@ -4,7 +4,7 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
-prefix bif_x: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso (untested)
+#prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
 select distinct ?np ?v where {
   graph ?h {
@@ -14,7 +14,8 @@ select distinct ?np ?v where {
     { ?np np:hasPublicationInfo ?g }
   }
   graph ?g {
-    { ?v ?p1 ?o1 } union { ?s2 ?v ?o2 } union { ?s3 ?p3 ?v }
-    ?v (luc:npIdx|bif_x:contains) ?_text .
+    { ?s ?p ?v . ?v luc:npIdx ?_text . }
+    union
+    { ?s ?p ?v .  ?v <bif:contains> ?_text . }
   }
 }
