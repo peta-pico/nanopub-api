@@ -1,13 +1,14 @@
-#+ summary: Find all nanopublications for a given triple pattern, ordered by recency
+#+ summary: Find all nanopublications for a given triple pattern with a signature of the given public key (not excluding invalid ones), sorted by recency
 #+ method: GET
 #+ pagination: 1000
 
 prefix np: <http://www.nanopub.org/nschema#>
+prefix npx: <http://purl.org/nanopub/x/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix pav: <http://purl.org/pav/>
 prefix prov: <http://www.w3.org/ns/prov#>
 
-select distinct ?np where {
+select distinct ?np ?date where {
   graph ?h {
     ?np a np:Nanopublication .
     ?np np:hasPublicationInfo ?pubinfo .
@@ -20,6 +21,8 @@ select distinct ?np where {
     ?__subj_iri ?__pred_iri ?__objliteral .
   }
   graph ?pubinfo {
+    ?sig npx:hasPublicKey ?_publickey .
+    ?np (dct:creator|dce:creator|pav:createdBy) ?__creator_iri .
     ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date .
   }
 }
