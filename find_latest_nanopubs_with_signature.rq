@@ -16,7 +16,7 @@ select distinct ?np ?date where {
   graph ?i {
     ?sig npx:hasPublicKey ?_publickey .
     ?np (dct:creator|dce:creator|pav:createdBy|prov:wasAttributedTo) ?__creator_iri .
-    optional { ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date . }
+    ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date .
   }
 }
 order by desc(?date)

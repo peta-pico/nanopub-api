@@ -20,7 +20,7 @@ select distinct ?np where {
     ?__subj_iri ?__pred_iri ?__objliteral .
   }
   graph ?pubinfo {
-    optional { ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date . }
+    ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date .
   }
 }
 order by desc(?date)

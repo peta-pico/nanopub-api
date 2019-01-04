@@ -21,7 +21,7 @@ select distinct ?np where {
     { ?s ?p ?_ref_iri }
   }
   graph ?pubinfo {
-    optional { ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date . }
+    ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date .
   }
 }
 order by desc(?date)
