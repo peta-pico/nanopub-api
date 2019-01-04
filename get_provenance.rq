@@ -1,4 +1,4 @@
-#+ summary: Get assertion graph by nanopub identifier
+#+ summary: Get provenance graph by nanopub identifier
 #+ method: GET
 
 prefix np: <http://www.nanopub.org/nschema#>
@@ -8,7 +8,7 @@ construct {
 } where {
   graph ?h {
     ?_np_iri a np:Nanopublication ;
-      np:hasAssertion ?a .
+      np:hasProvenance ?prov .
   }
-  graph ?a {?s ?p ?o}
+  graph ?prov {?s ?p ?o}
 }
