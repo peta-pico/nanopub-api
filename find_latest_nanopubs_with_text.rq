@@ -5,6 +5,7 @@
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
 prefix dct: <http://purl.org/dc/terms/>
+prefix dce: <http://purl.org/dc/elements/1.1/>
 prefix pav: <http://purl.org/pav/>
 prefix prov: <http://www.w3.org/ns/prov#>
 
