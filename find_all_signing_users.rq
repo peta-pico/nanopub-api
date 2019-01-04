@@ -18,9 +18,9 @@ select distinct ?signing_user where {
     ?s npx:hasSignature ?sig .
     {
       # This is much faster under Virtuoso than '... (dct:creator|dce:creator|pav:createdBy) ...':
-      {?np dct:creator ?signing_user} union 
-      {?np dce:creator ?signing_user} union 
-      {?np pav:createdBy ?signing_user}
+      { ?np dct:creator ?signing_user } union 
+      { ?np dce:creator ?signing_user } union 
+      { ?np pav:createdBy ?signing_user }
       # pav1:createdBy and pav2:createdBy are currently not covered (again because it would slow down Virtuoso)
     }
   }

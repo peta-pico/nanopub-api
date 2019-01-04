@@ -6,8 +6,8 @@ prefix npx: <http://purl.org/nanopub/x/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix dce: <http://purl.org/dc/elements/1.1/>
 prefix pav: <http://purl.org/pav/>
-prefix pav1: <http://swan.mindinformatics.org/ontologies/1.2/pav/>
-prefix pav2: <http://purl.org/pav/2.0/>
+#prefix pav1: <http://swan.mindinformatics.org/ontologies/1.2/pav/>
+#prefix pav2: <http://purl.org/pav/2.0/>
 
 select distinct ?pubkey where {
   graph ?h {
@@ -16,6 +16,13 @@ select distinct ?pubkey where {
   }
   graph ?i {
     ?s npx:hasPublicKey ?pubkey .
-    ?np (dct:creator|dce:creator|pav:createdBy|pav1:createdBy|pav2:createdBy) ?_user_iri .
+    {
+      # This is much faster under Virtuoso than '... (dct:creator|dce:creator|pav:createdBy) ...':
+      { ?np dct:creator ?_user_iri } union 
+      { ?np dce:creator ?_user_iri } union 
+      { ?np pav:createdBy ?_user_iri }
+      # pav1:createdBy and pav2:createdBy are currently not covered (again because it would slow down Virtuoso)
+    }
   }
 }
+
