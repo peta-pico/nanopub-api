@@ -1,1 +1,1 @@
-http://virtuoso.nanopubs.d2s.labs.vu.nl/sparql
+http://graphdb.dumontierlab.com/repositories/nanopubs
