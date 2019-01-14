@@ -1,0 +1,24 @@
+#+ summary: Find all nanopublications of the given type, optionally restricted by signature and public key, sorted by recency
+#+ method: GET
+#+ pagination: 1000
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix dce: <http://purl.org/dc/elements/1.1/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix pav: <http://purl.org/pav/>
+prefix prov: <http://www.w3.org/ns/prov#>
+
+select distinct ?np ?date where {
+  graph ?h {
+    ?np a np:Nanopublication .
+    ?np np:hasPublicationInfo ?i .
+  }
+  graph ?i {
+    ?np a ?_type_iri .
+    ?sig npx:hasPublicKey ?__publickey .
+    ?np (dct:creator|dce:creator|pav:createdBy) ?__creator_iri .
+    ?np (dct:created|pav:createdOn|prov:generatedAtTime) ?date .
+  }
+}
+order by desc(?date)
