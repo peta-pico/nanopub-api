@@ -3,10 +3,16 @@
 #+ pagination: 1000
 
 prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
 
 select distinct ?np where {
+  graph npa:graph {
+    ?np npa:hasHeadGraph ?h .
+    ?np npa:creationDay ?__day .
+    ?np npa:creationMonth ?__month .
+    ?np npa:creationYear ?__year .
+  }
   graph ?h {
-    ?np a np:Nanopublication .
     { ?np np:hasAssertion ?g } union
     { ?np np:hasProvenance ?g } union
     { ?np np:hasPublicationInfo ?g }
