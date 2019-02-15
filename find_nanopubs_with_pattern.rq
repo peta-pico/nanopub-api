@@ -5,7 +5,7 @@
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
 
-select distinct ?np where {
+select ?np where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day .
