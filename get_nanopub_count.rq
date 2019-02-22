@@ -1,10 +1,14 @@
-#+ summary: Get the number of nanopublications
+#+ summary: Get the number of nanopublications, possibly restricted by year, month, or day
 #+ method: GET
 
 prefix npa: <http://purl.org/nanopub/admin/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 select (count(?np) as ?count) where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
+    ?np npa:creationDay ?__day_xsd_string .
+    ?np npa:creationMonth ?__month_xsd_string .
+    ?np npa:creationYear ?__year_xsd_string .
   }
 }
