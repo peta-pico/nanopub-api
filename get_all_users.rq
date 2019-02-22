@@ -1,8 +1,9 @@
-#+ summary: Get all users, i.e. nanopublication creators that are linked to a signature (not excluding invalid ones)
+#+ summary: Get all users, i.e. nanopublication creators that are linked to a valid signature
 #+ method: GET
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
+prefix npa: <http://purl.org/nanopub/admin/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix dce: <http://purl.org/dc/elements/1.1/>
 prefix pav: <http://purl.org/pav/>
@@ -10,18 +11,21 @@ prefix pav: <http://purl.org/pav/>
 #prefix pav2: <http://purl.org/pav/2.0/>
 
 select distinct ?user where {
+  graph npa:graph {
+    ?np npa:hasHeadGraph ?h .
+    ?np npa:hasValidSignatureForPublicKey ?k .
+  }
   graph ?h {
-    ?np a np:Nanopublication .
     ?np np:hasPublicationInfo ?i .
   }
   graph ?i {
-    ?s npx:hasSignature ?sig .
+    ?s npx:hasPublicKey ?k .
     {
       # This is much faster under Virtuoso than '... (dct:creator|dce:creator|pav:createdBy) ...':
       { ?np dct:creator ?user } union 
       { ?np dce:creator ?user } union 
       { ?np pav:createdBy ?user }
-      # pav1:createdBy and pav2:createdBy are currently not covered (again because it would slow down Virtuoso)
+      # pav1:createdBy and pav2:createdBy are currently not covered (also slows down Virtuoso)
     }
   }
 }
