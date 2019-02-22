@@ -2,13 +2,16 @@
 #+ method: GET
 
 prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
 
 construct {
   ?s ?p ?o
 } where {
+  graph npa:graph {
+    ?_np_iri npa:hasHeadGraph ?h .
+  }
   graph ?h {
-    ?_np_iri a np:Nanopublication ;
-      np:hasProvenance ?prov .
+    ?_np_iri np:hasProvenance ?prov .
   }
   graph ?prov {?s ?p ?o}
 }
