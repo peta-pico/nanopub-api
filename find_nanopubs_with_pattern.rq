@@ -4,6 +4,7 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 select ?np where {
   graph npa:graph {
