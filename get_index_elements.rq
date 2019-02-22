@@ -3,10 +3,13 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
+prefix npa: <http://purl.org/nanopub/admin/>
 
 select ?elementnp {
+  graph npa:graph {
+    ?_indexnp_iri npa:hasHeadGraph ?h .
+  }
   graph ?h {
-    ?_indexnp_iri a np:Nanopublication .
     ?_indexnp_iri np:hasAssertion ?index_a .
     ?_indexnp_iri np:hasPublicationInfo ?index_i .
   }
