@@ -9,9 +9,9 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 select ?np where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
-    ?np npa:creationDay ?__day_xsd_string .
-    ?np npa:creationMonth ?__month_xsd_string .
-    ?np npa:creationYear ?__year_xsd_string .
+    ?np npa:creationDay ?__day_xsd_date .
+    ?np npa:creationMonth ?__month_xsd_gYearMonth .
+    ?np npa:creationYear ?__year_xsd_gYear .
   }
   graph ?h {
     { ?np np:hasAssertion ?g } union

@@ -11,9 +11,9 @@ prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
 select ?np ?v where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
-    ?np npa:creationDay ?__day_xsd_string .
-    ?np npa:creationMonth ?__month_xsd_string .
-    ?np npa:creationYear ?__year_xsd_string .
+    ?np npa:creationDay ?__day_xsd_date .
+    ?np npa:creationMonth ?__month_xsd_gYearMonth .
+    ?np npa:creationYear ?__year_xsd_gYear .
   }
   graph ?h {
     { ?np np:hasAssertion ?g } union
