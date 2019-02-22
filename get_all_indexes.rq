@@ -11,9 +11,10 @@ prefix pav: <http://purl.org/pav/>
 prefix prov: <http://www.w3.org/ns/prov#>
 
 select ?np ?title ?date ?appends (count(distinct ?sub) as ?subindex_count) where {
-  graph npa:graph {
-    ?np npa:hasHeadGraph ?h .
-  }
+# Commented out for performance reasons under Virtuoso:
+#  graph npa:graph {
+#    ?np npa:hasHeadGraph ?h .
+#  }
   graph ?h {
     ?np np:hasAssertion ?a .
     ?np np:hasPublicationInfo ?i .
