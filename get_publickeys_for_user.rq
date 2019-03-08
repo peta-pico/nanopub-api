@@ -1,5 +1,6 @@
 #+ summary: Get all public keys used for signatures linked to the given user
 #+ method: GET
+#+ endpoint_in_url: False
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>

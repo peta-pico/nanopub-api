@@ -1,5 +1,6 @@
 #+ summary: Get provenance graph by nanopub identifier
 #+ method: GET
+#+ endpoint_in_url: False
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>

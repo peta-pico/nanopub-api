@@ -1,5 +1,6 @@
 #+ summary: Get the number of nanopublications, possibly restricted by year, month, or day
 #+ method: GET
+#+ endpoint_in_url: False
 
 prefix npa: <http://purl.org/nanopub/admin/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>

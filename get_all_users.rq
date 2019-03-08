@@ -1,5 +1,6 @@
 #+ summary: Get all users, i.e. nanopublication creators that are linked to a valid signature
 #+ method: GET
+#+ endpoint_in_url: False
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>

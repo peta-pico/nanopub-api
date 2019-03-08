@@ -1,6 +1,7 @@
 #+ summary: Get all nanopublication indexes (excluding incomplete ones)
 #+ method: GET
 #+ pagination: 1000
+#+ endpoint_in_url: False
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npx: <http://purl.org/nanopub/x/>
