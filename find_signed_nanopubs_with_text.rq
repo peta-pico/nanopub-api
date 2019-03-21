@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications that contain the given text, in undefined order
+#+ summary: Find all nanopublications that contain the given text and are signed with the given public key, in undefined order
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
@@ -15,6 +15,7 @@ select ?np ?v where {
     ?np npa:creationDay ?__day_xsd_date .
     ?np npa:creationMonth ?__month_xsd_gYearMonth .
     ?np npa:creationYear ?__year_xsd_gYear .
+    ?np npa:hasValidSignatureForPublicKey ?_pubkey .
   }
   graph ?h {
     { ?np np:hasAssertion ?g } union

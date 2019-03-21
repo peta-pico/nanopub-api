@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications that contain the given text, in undefined order
+#+ summary: Find all nanopublications for a given triple pattern signed with a given public key, in undefined order
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
@@ -6,15 +6,14 @@
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
-#prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
-select ?np ?v where {
+select ?np where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day_xsd_date .
     ?np npa:creationMonth ?__month_xsd_gYearMonth .
     ?np npa:creationYear ?__year_xsd_gYear .
+    ?np npa:hasValidSignatureForPublicKey ?_pubkey .
   }
   graph ?h {
     { ?np np:hasAssertion ?g } union
@@ -22,8 +21,7 @@ select ?np ?v where {
     { ?np np:hasPublicationInfo ?g }
   }
   graph ?g {
-    { ?s ?p ?v . ?v luc:npIdx ?_text . }
-    union
-    { ?s ?p ?v .  ?v <bif:contains> ?_text . }
+    ?__subj_iri ?__pred_iri ?__obj_iri .
+    ?__subj_iri ?__pred_iri ?__objliteral .
   }
 }
