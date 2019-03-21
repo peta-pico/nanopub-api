@@ -15,12 +15,10 @@ select ?np ?v where {
     ?np npa:creationDay ?__day_xsd_date .
     ?np npa:creationMonth ?__month_xsd_gYearMonth .
     ?np npa:creationYear ?__year_xsd_gYear .
-    ?np npa:hasValidSignatureForPublicKey ?_pubkey .
+    ?np npa:hasValidSignatureForPublicKey ?_pubkey_xsd_string .
   }
   graph ?h {
-    { ?np np:hasAssertion ?g } union
-    { ?np np:hasProvenance ?g } union
-    { ?np np:hasPublicationInfo ?g }
+    ?np ?__graphpred_iri ?g .
   }
   graph ?g {
     { ?s ?p ?v . ?v luc:npIdx ?_text . }

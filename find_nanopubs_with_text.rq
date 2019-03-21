@@ -17,9 +17,7 @@ select ?np ?v where {
     ?np npa:creationYear ?__year_xsd_gYear .
   }
   graph ?h {
-    { ?np np:hasAssertion ?g } union
-    { ?np np:hasProvenance ?g } union
-    { ?np np:hasPublicationInfo ?g }
+    ?np ?__graphpred_iri ?g .
   }
   graph ?g {
     { ?s ?p ?v . ?v luc:npIdx ?_text . }
