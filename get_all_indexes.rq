@@ -21,8 +21,13 @@ select ?np ?title ?date ?appends (count(distinct ?sub) as ?subindex_count) where
     ?np np:hasPublicationInfo ?i .
   }
   graph ?a {
-    optional { ?np npx:appendsIndex ?appends . }
-    optional { ?np npx:includesSubindex ?sub . }
+# The line below is a workaround due to a strange bug in Virtuoso with 'optional' statements
+# when the first statement within a graph:
+    { optional { ?np npx:appendsIndex ?appends . } } union
+    {
+      optional { ?np npx:includesSubindex ?sub . }
+      optional { ?np npx:appendsIndex ?appends . }
+    }
   }
   graph ?i {
     ?np a npx:NanopubIndex .
