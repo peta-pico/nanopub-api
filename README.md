@@ -5,3 +5,9 @@ Existing nanopub SPARQL endpoints:
 
 - http://graphdb.dumontierlab.com/repositories/nanopubs
 - http://openphacts.cs.man.ac.uk:8890/sparql
+
+## Docker
+
+Build container:
+
+    $ docker build -t nanopub/grlc .
