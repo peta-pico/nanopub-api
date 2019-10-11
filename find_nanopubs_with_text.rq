@@ -5,16 +5,15 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
 #prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
 select ?np ?v where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
-    ?np npa:creationDay ?__day_xsd_date .
-    ?np npa:creationMonth ?__month_xsd_gYearMonth .
-    ?np npa:creationYear ?__year_xsd_gYear .
+    ?np npa:creationDay ?__day_iri .
+    ?np npa:creationMonth ?__month_iri .
+    ?np npa:creationYear ?__year_iri .
   }
   graph ?h {
     ?np ?__graphpred_iri ?g .
