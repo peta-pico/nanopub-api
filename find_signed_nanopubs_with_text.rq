@@ -5,11 +5,12 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
+prefix npx: <http://purl.org/nanopub/x/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
 #prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
-select ?np ?v where {
+select ?np ?v ?retraction where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day_iri .
@@ -24,5 +25,17 @@ select ?np ?v where {
     { ?s ?p ?v . ?v luc:npIdx ?_text . }
     union
     { ?s ?p ?v .  ?v <bif:contains> ?_text . }
+  }
+  optional {
+    graph npa:graph {
+      ?retraction npa:hasHeadGraph ?rh .
+      ?retraction npa:hasValidSignatureForPublicKey ?_pubkey_xsd_string .
+    }
+    graph ?rh {
+      ?retraction np:hasAssertion ?ra .
+    }
+    graph ?ra {
+      ?somebody npx:retracts ?np .
+    }
   }
 }

@@ -5,9 +5,10 @@
 
 prefix np: <http://www.nanopub.org/nschema#>
 prefix npa: <http://purl.org/nanopub/admin/>
+prefix npx: <http://purl.org/nanopub/x/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
-select ?np where {
+select ?np ?retraction where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day_iri .
@@ -21,5 +22,17 @@ select ?np where {
   graph ?g {
     ?__subj_iri ?__pred_iri ?__obj_iri .
     ?__subj_iri ?__pred_iri ?__objliteral .
+  }
+  optional {
+    graph npa:graph {
+      ?retraction npa:hasHeadGraph ?rh .
+      ?retraction npa:hasValidSignatureForPublicKey ?_pubkey_xsd_string .
+    }
+    graph ?rh {
+      ?retraction np:hasAssertion ?ra .
+    }
+    graph ?ra {
+      ?somebody npx:retracts ?np .
+    }
   }
 }
