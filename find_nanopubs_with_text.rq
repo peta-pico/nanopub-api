@@ -9,7 +9,7 @@ prefix dct: <http://purl.org/dc/terms/>
 prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
 #prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
-select ?np ?v ?date where {
+select ?np ?v ?date ?pubkey where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day_iri .
@@ -24,5 +24,10 @@ select ?np ?v ?date where {
     { ?s ?p ?v . ?v luc:npIdx ?_text . }
     union
     { ?s ?p ?v .  ?v <bif:contains> ?_text . }
+  }
+  optional {
+    graph npa:graph {
+      ?np npa:hasValidSignatureForPublicKey ?pubkey .
+    }
   }
 }
