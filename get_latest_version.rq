@@ -1,0 +1,40 @@
+#+ summary: For signed nanopublications, retrieves the latest in a chain (or chains) of npx:supersedes relations, excluding retracted nanopublications, signed with the same public key.
+#+ method: GET
+#+ pagination: 1000
+#+ endpoint_in_url: False
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix dct: <http://purl.org/dc/terms/>
+
+select ?latest ?date where {
+  graph npa:graph {
+    ?_np_iri npa:hasValidSignatureForPublicKey ?pubkey .
+    ?latest npa:hasValidSignatureForPublicKey ?pubkey .
+    ?latest dct:created ?date .
+  }
+  graph npa:networkGraph {
+    ?latest (npx:supersedes)* ?_np_iri .
+  }
+  filter not exists {
+    graph npa:networkGraph {
+      ?newer npx:supersedes ?latest .
+    }
+    graph npa:graph {
+      ?newer npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+  }
+  filter not exists {
+    graph npa:graph {
+      ?retraction npa:hasHeadGraph ?rh .
+      ?retraction npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+    graph ?rh {
+      ?retraction np:hasAssertion ?ra .
+    }
+    graph ?ra {
+      ?somebody npx:retracts ?latest .
+    }
+  }
+}
