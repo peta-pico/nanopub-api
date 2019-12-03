@@ -11,22 +11,28 @@ prefix pav: <http://purl.org/pav/>
 #prefix pav1: <http://swan.mindinformatics.org/ontologies/1.2/pav/>
 #prefix pav2: <http://purl.org/pav/2.0/>
 
-select distinct ?user where {
+select ?user ?pubkey ?intronp ?date where {
   graph npa:graph {
-    ?np npa:hasHeadGraph ?h .
-    ?np npa:hasValidSignatureForPublicKey ?k .
+    ?intronp npa:hasHeadGraph ?h .
+    ?intronp npa:hasValidSignatureForPublicKey ?pubkey .
+    ?intronp dct:created ?date .
   }
   graph ?h {
-    ?np np:hasPublicationInfo ?i .
+    ?intronp np:hasAssertion ?a .
   }
-  graph ?i {
-    ?s npx:hasPublicKey ?k .
-    {
-      # This is much faster under Virtuoso than '... (dct:creator|dce:creator|pav:createdBy) ...':
-      { ?np dct:creator ?user } union 
-      { ?np dce:creator ?user } union 
-      { ?np pav:createdBy ?user }
-      # pav1:createdBy and pav2:createdBy are currently not covered (also slows down Virtuoso)
+  graph ?a {
+    ?keydeclaration npx:declaredBy ?user .
+  }
+  filter not exists {
+    graph npa:graph {
+      ?retraction npa:hasHeadGraph ?rh .
+      ?retraction npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+    graph ?rh {
+      ?retraction np:hasAssertion ?ra .
+    }
+    graph ?ra {
+      ?somebody npx:retracts ?intronp .
     }
   }
 }
