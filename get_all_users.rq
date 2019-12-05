@@ -11,7 +11,7 @@ prefix pav: <http://purl.org/pav/>
 #prefix pav1: <http://swan.mindinformatics.org/ontologies/1.2/pav/>
 #prefix pav2: <http://purl.org/pav/2.0/>
 
-select ?user ?pubkey ?intronp ?date where {
+select ?user ?intronp ?date ?pubkey where {
   graph npa:graph {
     ?intronp npa:hasHeadGraph ?h .
     ?intronp npa:hasValidSignatureForPublicKey ?pubkey .
@@ -36,3 +36,4 @@ select ?user ?pubkey ?intronp ?date where {
     }
   }
 }
+order by ?user desc(?date)
