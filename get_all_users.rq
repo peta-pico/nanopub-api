@@ -10,8 +10,9 @@ prefix dce: <http://purl.org/dc/elements/1.1/>
 prefix pav: <http://purl.org/pav/>
 #prefix pav1: <http://swan.mindinformatics.org/ontologies/1.2/pav/>
 #prefix pav2: <http://purl.org/pav/2.0/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
 
-select ?user ?intronp ?date ?pubkey where {
+select ?user ?name ?intronp ?date ?pubkey where {
   graph npa:graph {
     ?intronp npa:hasHeadGraph ?h .
     ?intronp npa:hasValidSignatureForPublicKey ?pubkey .
@@ -22,6 +23,9 @@ select ?user ?intronp ?date ?pubkey where {
   }
   graph ?a {
     ?keydeclaration npx:declaredBy ?user .
+    optional {
+      ?user foaf:name ?name .
+    }
   }
   filter not exists {
     graph npa:graph {
