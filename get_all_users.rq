@@ -39,5 +39,17 @@ select ?user ?name ?intronp ?date ?pubkey where {
       ?somebody npx:retracts ?intronp .
     }
   }
+  filter not exists {
+    graph npa:graph {
+      ?superseding npa:hasHeadGraph ?sh .
+      ?superseding npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+    graph ?sh {
+      ?superseding np:hasPublicationInfo ?si .
+    }
+    graph ?si {
+      ?superseding npx:supersedes ?intronp .
+    }
+  }
 }
 order by ?user desc(?date)

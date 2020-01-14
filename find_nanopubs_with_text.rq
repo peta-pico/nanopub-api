@@ -29,5 +29,9 @@ select ?np ?v ?date ?pubkey where {
     graph npa:graph {
       ?np npa:hasValidSignatureForPublicKey ?pubkey .
     }
+    # This duplication is a workaround for a Virtuoso bug (otherwise <bif:contains> above overgenerates):
+    graph npa:graph {
+      ?np npa:hasValidSignatureForPublicKey ?pubkey .
+    }
   }
 }
