@@ -1,2 +1,2 @@
-FROM clariah/grlc:dev
+FROM clariah/grlc:latest
 ADD . /home/grlc/queries/
