@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications that contain the given URI and that are signed with a public key, in undefined order
+#+ summary: Find all signed nanopublications that contain the given URI, in undefined order
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
@@ -16,7 +16,8 @@ select ?np ?date ?pubkey ?superseded ?retracted where {
     ?np npa:creationMonth ?__month_iri .
     ?np npa:creationYear ?__year_iri .
     ?np dct:created ?date .
-    ?np npa:hasValidSignatureForPublicKey ?pubkey .
+    ?np npa:hasValidSignatureForPublicKey ?__pubkey_xsd_string .
+    bind(?__pubkey_xsd_string as ?pubkey)
   }
   graph ?h {
     ?np ?__graphpred_iri ?g .
