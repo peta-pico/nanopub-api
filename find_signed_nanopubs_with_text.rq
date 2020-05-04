@@ -1,4 +1,4 @@
-#+ summary: Find all signed nanopublications that contain the given text, in undefined order
+#+ summary: Find signed nanopublications that contain the given text
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False

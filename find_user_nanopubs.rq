@@ -1,4 +1,4 @@
-#+ summary: Find all signed nanopublications, in undefined order
+#+ summary: Find signed nanopublications (DEPRECATED; use find_signed_nanopubs instead)
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False

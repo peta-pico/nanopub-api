@@ -1,4 +1,4 @@
-#+ summary: Find all nanopublications for a given triple pattern, in undefined order
+#+ summary: Find nanopublications for the given triple pattern
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
