@@ -39,5 +39,5 @@ select ?thing ?label ?description ?np ?date ?pubkey where {
   }
   bind(coalesce(?comment, ?dctdesc, "") as ?description)
   bind(concat(" ",lcase(str(?label))," ",lcase(str(?description))," ") as ?text)
-  filter( contains(?text, if(?_searchterm = ""^^xsd:string, " ", ?_searchterm) ))
+  filter( contains(?text, ?_searchterm) )
 }
