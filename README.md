@@ -8,7 +8,5 @@ Build container:
 
     $ docker build -t nanopub/grlc .
 
-To update without updating to latest grlc version, change first line of Dockerfile to:
-
-    FROM nanopub/grlc:latest
+To update without updating to latest grlc version, change first line of Dockerfile from "FROM clariah/grlc:latest" to "FROM nanopub/grlc:latest".
 

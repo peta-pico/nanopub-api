@@ -1,3 +1,4 @@
-FROM clariah/grlc:latest
+FROM nanopub/grlc:latest
+#FROM clariah/grlc:latest
 RUN rm -rf /home/grlc/queries/*
 ADD . /home/grlc/queries/
