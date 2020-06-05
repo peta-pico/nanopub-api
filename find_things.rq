@@ -1,0 +1,43 @@
+#+ summary: Find things introduced in nanopublications
+#+ method: GET
+#+ pagination: 1000
+#+ endpoint_in_url: False
+
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
+prefix dct: <http://purl.org/dc/terms/>
+
+select ?thing ?label ?description ?np ?date ?pubkey where {
+  graph npa:graph {
+    ?np npa:hasHeadGraph ?h .
+    ?np npa:creationDay ?__day_iri .
+    ?np npa:creationMonth ?__month_iri .
+    ?np npa:creationYear ?__year_iri .
+    ?np dct:created ?date .
+  }
+  graph ?h {
+    ?np np:hasAssertion ?a .
+  }
+  graph ?a {
+    ?thing a ?_type_iri .
+    optional {
+      ?thing rdfs:label ?label .
+    }
+    optional {
+      ?thing rdfs:comment ?comment .
+    }
+    optional {
+      ?thing dct:description ?dctdesc .
+    }
+  }
+  optional {
+    graph npa:graph {
+      ?np npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+  }
+  bind(coalesce(?comment, ?dctdesc, "") as ?description)
+  bind(concat(" ",lcase(str(?label))," ",lcase(str(?description))," ") as ?text)
+  filter( contains(?text, if(?_searchterm = ""^^xsd:string, " ", ?_searchterm) ))
+}
