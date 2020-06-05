@@ -1,4 +1,4 @@
-#+ summary: Find signed nanopublications for the given triple pattern
+#+ summary: Find things introduced in signed nanopublications (experimental)
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
