@@ -21,6 +21,7 @@ select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where
   }
   graph ?h {
     ?np np:hasAssertion ?a .
+    ?np np:hasPublicationInfo ?i.
   }
   graph ?a {
     ?thing a ?_type_iri .
@@ -33,6 +34,9 @@ select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where
     optional {
       ?thing dct:description ?dctdesc .
     }
+  }
+  graph ?i {
+    ?np (npx:introduces|npx:describes) ?thing .
   }
   bind(exists {
     graph npa:graph {
