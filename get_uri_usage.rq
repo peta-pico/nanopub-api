@@ -1,0 +1,16 @@
+#+ summary: Get the counts on how often the given URI is used in different positions
+#+ method: GET
+#+ pagination: 1000
+#+ endpoint_in_url: False
+
+prefix npa: <http://purl.org/nanopub/admin/>
+
+select (count(?s) as ?subj) (count(?p) as ?pred) (count(?o) as ?obj) (count(?c) as ?class) where {
+  graph ?g {
+    { ?_ref_iri ?s ?s2 . } union
+    { ?p ?_ref_iri ?p2 . } union
+    { ?o ?o2 ?_ref_iri . } union
+    { ?c a ?_ref_iri . }
+  }
+  filter (!sameTerm(?g, npa:graph) && !sameTerm(?g, npa:networkGraph)) 
+}
