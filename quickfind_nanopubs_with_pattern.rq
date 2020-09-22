@@ -1,0 +1,24 @@
+#+ summary: A quick-and-dirty hack to get nanopublications for a given pattern more quickly for searches of very frequent URIs (with limited search features and checks)
+#+ method: GET
+#+ pagination: 1000
+#+ endpoint_in_url: False
+
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
+prefix dct: <http://purl.org/dc/terms/>
+
+select ?np ?graphpred ?subj ?pred ?obj ?date where {
+  graph npa:graph {
+    ?np dct:created ?date .
+  }
+  graph ?h {
+    ?np ?__graphpred_iri ?g .
+    bind(?__graphpred_iri as ?graphpred)
+  }
+  graph ?g {
+    ?__subj_iri ?__pred_iri ?__obj_iri .
+    bind(?__subj_iri as ?subj)
+    bind(?__pred_iri as ?pred)
+    bind(?__obj_iri as ?obj)
+  }
+}
