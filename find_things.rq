@@ -23,9 +23,7 @@ select ?thing ?label ?description ?np ?date ?pubkey where {
   }
   graph ?a {
     ?thing a ?_type_iri .
-    optional {
-      ?thing rdfs:label ?label .
-    }
+    ?thing rdfs:label ?label .
     optional {
       ?thing rdfs:comment ?comment .
     }
