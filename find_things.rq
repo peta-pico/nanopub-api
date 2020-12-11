@@ -1,4 +1,4 @@
-#+ summary: Find things introduced in nanopublications (experimental)
+#+ summary: Find things introduced in nanopublications
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False

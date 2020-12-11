@@ -1,4 +1,4 @@
-#+ summary: Find things introduced in signed nanopublications
+#+ summary: Find signed nanopublications that are not retracted or superseded containing the given text
 #+ method: GET
 #+ pagination: 1000
 #+ endpoint_in_url: False
@@ -8,8 +8,10 @@ prefix npa: <http://purl.org/nanopub/admin/>
 prefix npx: <http://purl.org/nanopub/x/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix dct: <http://purl.org/dc/terms/>
+prefix luc: <http://www.ontotext.com/owlim/lucene#>   # for GraphDB
+#prefix bif: <http://www.openlinksw.com/schemas/bif#>  # for Virtuoso
 
-select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where {
+select ?np ?graphpred ?subj ?pred ?v ?date ?pubkey ?superseded ?retracted where {
   graph npa:graph {
     ?np npa:hasHeadGraph ?h .
     ?np npa:creationDay ?__day_iri .
@@ -20,23 +22,15 @@ select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where
     bind(?__pubkey_xsd_string as ?pubkey)
   }
   graph ?h {
-    ?np np:hasAssertion ?a .
-    ?np np:hasPublicationInfo ?i.
+    ?np ?__graphpred_iri ?g .
+    bind(?__graphpred_iri as ?graphpred)
   }
-  graph ?a {
-    ?thing a ?_type_iri .
-    ?thing rdfs:label ?label .
-    optional {
-      ?thing rdfs:comment ?comment .
-    }
-    optional {
-      ?thing dct:description ?dctdesc .
-    }
+  graph ?g {
+    { ?subj ?pred ?v . ?v luc:npIdx ?_text . }
+    union
+    { ?subj ?pred ?v .  ?v <bif:contains> ?_text . }
   }
-  graph ?i {
-    ?np (npx:introduces|npx:describes) ?thing .
-  }
-  bind(exists {
+  filter not exists {
     graph npa:graph {
       ?newversion npa:hasHeadGraph ?nh .
       ?newversion npa:hasValidSignatureForPublicKey ?pubkey .
@@ -47,8 +41,8 @@ select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where
     graph ?ni {
       ?newversion npx:supersedes ?np .
     }
-  } as ?superseded )
-  bind(exists {
+  }
+  filter not exists {
     graph npa:graph {
       ?retraction npa:hasHeadGraph ?rh .
       ?retraction npa:hasValidSignatureForPublicKey ?pubkey .
@@ -59,8 +53,5 @@ select ?thing ?label ?description ?np ?date ?pubkey ?superseded ?retracted where
     graph ?ra {
       ?somebody npx:retracts ?np .
     }
-  } as ?retracted )
-  bind(coalesce(?comment, ?dctdesc, "") as ?description)
-  bind(concat(" ",lcase(str(?label))," ",lcase(str(?description))," ") as ?text)
-  filter( contains(?text, lcase(str(?_searchterm))) )
+  }
 }
