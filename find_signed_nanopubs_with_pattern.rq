@@ -1,6 +1,6 @@
 #+ summary: Find signed nanopublications for the given triple pattern
 #+ method: GET
-#+ pagination: 1000
+#+ pagination: 10000
 #+ endpoint_in_url: False
 
 prefix np: <http://www.nanopub.org/nschema#>
